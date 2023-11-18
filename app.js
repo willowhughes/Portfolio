@@ -1,14 +1,18 @@
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        console.log(entry)
+function setupIntersectionObserver(selector) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        console.log(entry);
         if (entry.isIntersecting) {
-            entry.target.classList.add('show');
+          entry.target.classList.add('show');
         } else {
-            entry.target.classList.remove('show');
+          entry.target.classList.remove('show');
         }
+      });
     });
-});
-
-const hiddenElements = document.querySelectorAll('.hidden');
-hiddenElements.forEach((el) => observer.observe(el));
+  
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((el) => observer.observe(el));
+  }
+  
+  setupIntersectionObserver('.hidden');
